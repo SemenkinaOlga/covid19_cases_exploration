@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"FSM","properties":{"Country":"Micronesia","Mesoregion":"Oceania","Macroregion":"Oceania","Total confirmed":"21673.0","Total deaths":"51.0"},"geometry":{"type":"Point","coordinates":[150.15,7.3]}}
+]}

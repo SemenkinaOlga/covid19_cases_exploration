@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"STP","properties":{"Country":"Sao Tome and Principe","Mesoregion":"Middle Africa","Macroregion":"Africa","Total confirmed":"6252.0","Total deaths":"77.0"},"geometry":{"type":"Point","coordinates":[7.0,1.0]}}
+]}

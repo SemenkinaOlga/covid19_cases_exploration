@@ -1,0 +1,167 @@
+#country_type_radio label {
+  flex: 1;
+  position: relative;
+  background: transparent;
+  color: #ddd;
+}
+
+body {
+  font-family: Georgia;
+}
+
+h4 {
+ font-family: Georgia !important;
+ font-weight: 300;
+ font-size: 26px;
+ line-height: 1.4em;
+}
+
+h5 {
+ font-family: Georgia !important;
+ font-weight: 300;
+ font-size: 22px;
+ line-height: 1.4em;
+}
+
+h6 {
+ font-family: Georgia !important;
+ font-weight: 100;
+ font-size: 18px;
+ line-height: 0.2em;
+}
+
+#country_select_dropdown .Select--multi .Select-value {
+  background-color: 'black';
+  color: #fff !important;
+}
+
+#country_select_dropdown .VirtualizedSelectFocusedOption {
+  background-color: #19b599;
+  color: 'white'
+}
+
+input:valid {
+    color: white;
+    background-color: black;
+    border-color: 'black' !important;
+    justifyContent: 'center';
+    textAlign: 'center';
+    align-items: 'center';
+}
+
+.DateRangePickerInput {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+.DayPicker_focusRegion {
+    background-color: black;
+}
+
+.CalendarMonth {
+    background-color: black;
+}
+
+.CalendarMonth_caption {
+    background-color: black;
+    color: white;
+}
+
+.DayPickerNavigation_leftButton__horizontalDefault {
+    background-color: black;
+    border-color: rgb(60, 60, 60);
+}
+
+.DayPickerNavigation_button__horizontalDefault {
+    background-color: black;
+    border-color: rgb(60, 60, 60);
+}
+
+.DayPicker_weekHeader {
+    color: white;
+}
+
+.CalendarDay__default {
+    border: 1px solid rgb(80, 80, 80);
+    background: rgb(60, 60, 60);
+    color: white;
+}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+    background: #00a699 !important;
+    border: 1px solid rgb(80, 80, 80) !important;
+    color: #fff !important;
+}
+
+.CalendarDay:active {
+    background: #00a699 !important;
+    border: 1px solid rgb(80, 80, 80) !important;
+    color: #fff !important;
+}
+
+.CalendarMonthGrid {
+    background: black;
+}
+
+.DayPickerKeyboardShortcuts_panel {
+    overflow: auto;
+    background: black;
+    border: 1px solid black;
+}
+
+.CalendarDay__selected_span {
+    background: #5accc5;
+    border: 1px double #47a19b;
+    color: #fff;
+}
+
+
+.DayPickerNavigation_svg__horizontal {
+    fill: white;
+    display: block
+}
+
+.DateRangePickerInput_arrow_svg {
+    vertical-align: middle;
+    fill: white;
+ }
+
+.Select-control {
+  background-color: rgb(25, 25, 25) !important;
+  color: 'white' !important;
+}
+
+.Select-menu-outer {
+  background-color: rgb(25, 25, 25);
+}
+
+.VirtualizedSelectOption {
+    background-color: rgb(25, 25, 25);
+    color: white;
+}
+
+.VirtualizedSelectFocusedOption {
+    background-color: rgb(25, 25, 25);
+    color: white;
+}
+
+/* Color of default text */
+.Select-value-label {
+    color: white !important;
+}
+
+.Select-control {
+    background-color: #fff;
+    border: 1px solid #292929;
+}
+
+input:valid {
+    font-size: inherit;
+}
+
+.CalendarDay__blocked_out_of_range, .CalendarDay__blocked_out_of_range:active, .CalendarDay__blocked_out_of_range:hover {
+    background: #5E1914;
+    border: 1px solid #420D09;
+}
+

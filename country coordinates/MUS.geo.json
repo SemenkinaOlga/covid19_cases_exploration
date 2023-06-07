@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"MUS","properties":{"Country":"Mauritius","Mesoregion":"Eastern Africa","Macroregion":"Africa","Total confirmed":"263177.0","Total deaths":"1028.0"},"geometry":{"type":"Point","coordinates":[57.33,-20.17]}}
+]}

@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"LIE","properties":{"Country":"Liechtenstein","Mesoregion":"Western Europe","Macroregion":"Europe","Total confirmed":"20263.0","Total deaths":"86.0"},"geometry":{"type":"Point","coordinates":[9.32,47.16]}}
+]}

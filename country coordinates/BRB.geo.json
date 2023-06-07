@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"BRB","properties":{"Country":"Barbados","Mesoregion":"Caribbean","Macroregion":"Americas","Total confirmed":"102609.0","Total deaths":"560.0"},"geometry":{"type":"Point","coordinates":[-59.32,13.1]}}
+]}
