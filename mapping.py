@@ -93,8 +93,8 @@ def get_new_map(df, value_col, title):
             sticky=False,
             labels=True,
             style="""
-            background-color: 'darkGray';
-            color: 'white'
+            background-color: #333;
+            color: white;
             border: 1px solid black;
             border-radius: 1px;
             box-shadow: 1px;

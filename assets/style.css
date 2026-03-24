@@ -28,6 +28,8 @@ h6 {
  font-weight: 100;
  font-size: 18px;
  line-height: 0.2em;
+ margin-block-start: 1.33em;
+   margin-block-end: 1.33em;
 }
 
 #country_select_dropdown .Select--multi .Select-value {
@@ -380,9 +382,9 @@ button:hover,
 
 /* ── Ensure full row background, no double layers ── */
 .dash-options-list-option {
-  background-color: #111 !important;
+  background-color: #000000 !important;
   color: #ddd !important;
-  padding: 6px 10px !important;
+  padding: 3px 10px !important;
   display: flex !important;
   align-items: center !important;
 }
