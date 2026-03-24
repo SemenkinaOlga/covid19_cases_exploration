@@ -41,6 +41,7 @@ df_world['Confirmed'] = np.where(df_world['Confirmed'] <= 0, df_world['Confirmed
 df_world['Deaths_pure'] = df_world['Deaths'] - df_world['Deaths'].shift()
 df_world['Deaths_pure'] = np.where(df_world['Deaths_pure'] <= 0,
                                    df_world['Deaths_pure'].shift(), df_world['Deaths_pure'])
+last_date = df_world['Date'].max()
 
 df_COVID_summary = df_COVID.groupby(['Country_Region', 'meso_region', 'macro_region', 'code']).agg(
     {'Confirmed': 'max', 'Deaths': 'max', 'Recovered': 'max'}).reset_index()
@@ -72,7 +73,7 @@ delete_tile_for_map("init_map.html")
 
 df_table = df_COVID[:10]
 
-end_date = datetime.now() - relativedelta(days=1)
+end_date = last_date - relativedelta(days=1)
 start_date = end_date - relativedelta(days=365)
 min_date_allowed = min(df_COVID['Date'])
 max_date_allowed = max(df_COVID['Date'])
@@ -122,7 +123,7 @@ app.layout = html.Div(
                         display_format='DD-MM-YYYY',
                         min_date_allowed=min_date_allowed,
                         max_date_allowed=max_date_allowed,
-                        initial_visible_month=datetime.now(),
+                        initial_visible_month=last_date,
                         end_date=end_date,
                         start_date=start_date,
                         style={'background-color': "rgb(40,40,40)", 'fontSize': 10}
@@ -227,19 +228,19 @@ def show_hide_element(check_test):
 
 def define_start_end_dates(start_date, end_date, date_type):
     if date_type == '1 month':
-        end_date = datetime.now() - relativedelta(days=1)
+        end_date = last_date - relativedelta(days=1)
         start_date = end_date - relativedelta(days=30)
     elif date_type == '3 month':
-        end_date = datetime.now() - relativedelta(days=1)
+        end_date = last_date - relativedelta(days=1)
         start_date = end_date - relativedelta(days=90)
     elif date_type == '6 month':
-        end_date = datetime.now() - relativedelta(days=1)
+        end_date = last_date - relativedelta(days=1)
         start_date = end_date - relativedelta(days=180)
     elif date_type == '1 year':
-        end_date = datetime.now() - relativedelta(days=1)
+        end_date = last_date - relativedelta(days=1)
         start_date = end_date - relativedelta(days=365)
     elif date_type == 'All time':
-        end_date = datetime.now() - relativedelta(days=1)
+        end_date = last_date - relativedelta(days=1)
         start_date = min_date_allowed
     else:
         start_date = datetime.fromisoformat(start_date)
@@ -311,11 +312,18 @@ def update(country, mesoregion, macroregion, region_type, smoothed_check, check_
         current_df['Confirmed_smoothed'] = current_df['Confirmed'].ewm(span=25).mean()
 
     df_ts = current_df[['Date', column]]
+    print("df_ts")
+    print(df_ts.head())
     df_ts.index = pd.to_datetime(df_ts['Date'], format='%Y-%m-%d')
     del df_ts['Date']
 
     df_ts_freq = df_ts.asfreq('D')
     df_ts_freq[column] = df_ts_freq[column].fillna(0)
+
+    print("df_ts_freq")
+    print(df_ts_freq.head())
+    print("days_before")
+    print(days_before)
 
     train, test = forecast.make_train_test(df_ts_freq, days_before)
     test = forecast.add_more_dates(test, days_after)

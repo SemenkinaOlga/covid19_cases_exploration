@@ -143,7 +143,8 @@ def make_forecast_LinearRegression(column, train, test, lags):
 
 
 def make_train_test(df, days):
-    dateMinusMonth = datetime.now() - relativedelta(days=days)
+    last_date = df.index.max()
+    dateMinusMonth = last_date - relativedelta(days=days)
     dateMinusMonth = dateMinusMonth.strftime('%Y-%m-%d')
 
     train = df[df.index <= pd.to_datetime(dateMinusMonth, format='%Y-%m-%d')]
@@ -155,7 +156,7 @@ def make_train_test(df, days):
 def add_more_dates(test, count):
     indexes = []
     values = []
-    cur_date = datetime.now()
+    cur_date = test.index.max()
     cur_date_str = cur_date.strftime('%Y-%m-%d')
 
     for i in range(0, count):
