@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"SMR","properties":{"Country:":"San Marino","Meso region:":"Southern Europe","Macro region:":"Europe","Total confirmed:":"6829526.0","Total deaths":"118.0"},"geometry":{"type":"Point","coordinates":[12.25,43.46]}}
+]}

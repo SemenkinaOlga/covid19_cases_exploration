@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"AND","properties":{"Country:":"Andorra","Meso region:":"Southern Europe","Macro region:":"Europe","Total confirmed:":"17536723.0","Total deaths":"155.0"},"geometry":{"type":"Point","coordinates":[1.3,42.3]}}
+]}

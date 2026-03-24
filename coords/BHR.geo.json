@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"BHR","properties":{"Country:":"Bahrain","Meso region:":"Western Asia","Macro region:":"Asia","Total confirmed:":"254057542.0","Total deaths":"1521.0"},"geometry":{"type":"Point","coordinates":[-176.28,0.13]}}
+]}

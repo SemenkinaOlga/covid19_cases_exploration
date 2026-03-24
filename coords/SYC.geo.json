@@ -1,0 +1,3 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","id":"SYC","properties":{"Country:":"Seychelles","Meso region:":"Eastern Africa","Macro region:":"Africa","Total confirmed:":"16882403.0","Total deaths":"169.0"},"geometry":{"type":"Point","coordinates":[55.4,-4.35]}}
+]}
