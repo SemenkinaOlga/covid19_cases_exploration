@@ -89,35 +89,34 @@ fig_init.update_yaxes(title_text='Cases', showgrid=True, gridwidth=1, gridcolor=
 app = dash.Dash(__name__)
 server = app.server
 
-app.layout = html.Div(
-    children=[
-        html.H2(children="COVID19 cases exploration", style={'textAlign': 'center', "color": "white"}),
-        html.Div(id='country_map_plot', children=[
-            html.Div(id='settings_select', children=[
+app.layout = html.Div(children=[
+    html.H2("COVID19 cases exploration", style={'textAlign': 'center', 'color': 'white'}),
+
+    html.Div(children=[
+
+        # Left column
+        html.Div(children=[
+
+            # Row 1: General and Forecast settings
+            html.Div(children=[
                 html.Div(id='country_select_block', children=[
                     html.H6('General settings'),
                     dcc.RadioItems(id='country_type_radio', options=['Country', 'Mesoregion', 'Macroregion', 'World'],
                                    value='World', labelStyle={'display': 'inline-block'}),
-                    dcc.Dropdown(
-                        id='country_select_dropdown', options=country_names, value='Bulgaria',
-                        clearable=False, style={'display': 'block'}),
-                    dcc.Dropdown(
-                        id='mesoregion_select_dropdown', options=mesoregions, value='Eastern Europe',
-                        clearable=False, style={'display': 'block'}),
-                    dcc.Dropdown(
-                        id='macroregion_select_dropdown', options=macroregions, value='Europe',
-                        clearable=False, style={'display': 'block'}),
-                    html.P(id='date_type_text', children=['Choose time interval'],
-                           style={'textAlign': 'center', 'align-items': 'center'}),
-                    dcc.Dropdown(
-                        id='date_type_selection',
-                        options=['1 month', '3 month', '6 month', '1 year', 'All time', 'Choose dates'],
-                        value='1 year',
-                        clearable=False, style={'display': 'block'}),
+                    dcc.Dropdown(id='country_select_dropdown', options=country_names, value='Bulgaria',
+                                 clearable=False),
+                    dcc.Dropdown(id='mesoregion_select_dropdown', options=mesoregions, value='Eastern Europe',
+                                 clearable=False),
+                    dcc.Dropdown(id='macroregion_select_dropdown', options=macroregions, value='Europe',
+                                 clearable=False),
+                    html.P('Choose time interval', style={'textAlign': 'center'}),
+                    dcc.Dropdown(id='date_type_selection',
+                                 options=['1 month', '3 month', '6 month', '1 year', 'All time', 'Choose dates'],
+                                 value='1 year', clearable=False),
                     html.P(id="choose_dates_text", children=["Choose dates between " +
-                                                             min_date_allowed.strftime("%d-%m-%Y")
-                                                             + " and " + max_date_allowed.strftime("%d-%m-%Y")],
-                           style={'textAlign': 'center', 'justifyContent': 'center', 'align-items': 'center'}),
+                                                             min_date_allowed.strftime("%d-%m-%Y") +
+                                                             " and " + max_date_allowed.strftime("%d-%m-%Y")],
+                           style={'textAlign': 'center'}),
                     dcc.DatePickerRange(
                         id='my_date_picker_range',
                         display_format='DD-MM-YYYY',
@@ -126,83 +125,97 @@ app.layout = html.Div(
                         initial_visible_month=last_date,
                         end_date=end_date,
                         start_date=start_date,
-                        style={'background-color': "rgb(40,40,40)", 'fontSize': 10}
-                    ),
-                ], style={'width': '60%', 'float': 'left', 'display': 'inline-block', "color": "white",
-                          'textAlign': 'center', 'justifyContent': 'center', 'align-items': 'center'}),
+                        style={'fontSize': 10}
+                    )
+                ],
+                style={'flex': '1', 'color': 'white', 'textAlign': 'center', 'padding': '0 5px'}),
+
                 html.Div(id='date_select_block', children=[
                     html.H6('Forecast settings'),
-                    dcc.Checklist(id='check_smoothed',
-                                  options=['Smoothed data'], value=['Smoothed data']
-                                  ),
-                    dcc.Checklist(id='check_test',
-                                  options=['Test forecast'], value=['Test forecast']
-                                  ),
-                    html.P(children=['Additional days for forecasting'],
-                           style={'textAlign': 'center', 'align-items': 'center'}),
-                    dcc.Input(id="days_after", type="number", value=60,
-                              style={'textAlign': 'center', 'align-items': 'center'}),
-                    html.P(id="days_before_text", children=["Amount of days for test"],
-                           style={'textAlign': 'center', 'justifyContent': 'center',
-                                  'align-items': 'center'}),
+                    dcc.Checklist(id='check_smoothed', options=['Smoothed data'], value=['Smoothed data']),
+                    dcc.Checklist(id='check_test', options=['Test forecast'], value=['Test forecast']),
+                    html.P('Additional days for forecasting', style={'textAlign': 'center'}),
+                    dcc.Input(id="days_after", type="number", value=60, style={'textAlign': 'center', 'width': '100%'}),
+                    html.P('Amount of days for test', style={'textAlign': 'center'}),
                     dcc.Input(id="days_before", type="number", value=60,
-                              style={'textAlign': 'center', 'align-items': 'center'}),
-                    html.P(id="days_before_warning", children=["Amount of days for test must be less then whole "
-                                                               "chosen time interval"],
-                           style={'display': 'none'}),
-                ], style={'width': '40%', 'float': 'left', 'display': 'inline-block', "color": "white",
-                          'textAlign': 'center'}),
-            ], style={'width': '46%', 'float': 'left', 'display': 'inline-block', "color": "white",
-                      'textAlign': 'center'}),
+                              style={'textAlign': 'center', 'width': '100%'}),
+                    html.P(id="days_before_warning",
+                           children=["Amount of days for test must be less than the chosen time interval"],
+                           style={'display': 'none'})
+                ],
+                style={'flex': '1', 'color': 'white', 'textAlign': 'center', 'padding': '0 10px'}),
+
+            ], style={'display': 'flex', 'flexDirection': 'row'}),
+
+            # Row 2: Map and Stats
+            html.Div(children=[
+                html.Div(id='total_cases', children=[
+                    html.Iframe(
+                    id='map-main',
+                    style={'border': 'none', 'width': '100%', 'height': 310},
+                    srcDoc=open(rd.get_relative_path("init_map.html"), 'r').read()
+                    )
+                ], style={'flex': '2', 'marginTop': '40px'}),
+                html.Div(id='cases_total_box', children=[
+                    html.Div(id='total_covid', children=[
+                    html.P("Total cases", style={'textAlign': 'center', 'color': 'white'}),
+                    html.P(id='total_cases_num', children="{:,}".format(total_cases),
+                           style={'textAlign': 'center', 'color': 'white'}),
+                ], style={'backgroundColor': '#044038', 'border': '5px black solid',
+                          'marginBottom': '5px', 'padding': '5px'}),
+
+                html.Div(id='death_covid', children=[
+                    html.P("Total deaths", style={'textAlign': 'center', 'color': 'white'}),
+                    html.P(id='death_cases_num', children="{:,}".format(total_death),
+                           style={'textAlign': 'center', 'color': 'white'}),
+                ], style={'backgroundColor': 'rgb(40,40,40)', 'border': '5px black solid',
+                          'marginBottom': '5px', 'padding': '5px'}),
+
+                html.Div(id='regression_block', children=[
+                    html.H6("Choose regression type", style={'textAlign': 'center', 'color': 'white'}),
+                    dcc.RadioItems(id='regression_type',
+                                   options=['ARIMA', 'SARIMA', 'Lasso', 'Random Forest', 'Linear Regression',
+                                            'Xgboost'],
+                                   value='Linear Regression',
+                                   style={'color': 'white'},
+                                   labelStyle={'display': 'block'})
+                ], style={'backgroundColor': 'black', 'border': '5px black solid', 'padding': '5px'})
+                ],
+                         style={'flex': '1', 'display': 'flex', 'flexDirection': 'column'}),
+            ], style={'display': 'flex', 'flexDirection': 'row', 'marginTop': '10px'})
+
+        ], style={'width': '46%', 'display': 'flex', 'flexDirection': 'column'}),
+
+        # ── Right column: both charts stacked ──
+        html.Div(children=[
             html.Div(id='country_plot', children=[
                 dcc.Graph(id='graph_country_cases', figure=fig_init)
-            ], style={'width': '52%', 'display': 'inline-block', 'height': 350})
-        ]),
-        html.Div(id='cases_forecast', children=[
-            html.Div(id='total_cases', children=[
-                html.Div(id='main_map_div', children=[
-                    html.Iframe(
-                        id='map-main',
-                        style={'border': 'none', 'width': '100%', 'height': 310},
-                        srcDoc=open(rd.get_relative_path("init_map.html"), 'r').read()
-                    )
-                ], style={'width': '100%'})
-            ], style={'width': '31%', 'float': 'left'}),
-            html.Div(id='cases_total_box', children=[
-                html.Div(id='total_covid', children=[
-                    html.P(children="Total cases", style={'textAlign': 'center', "color": "white"}),
-                    html.P(id='total_cases_num', children="{:,}".format(total_cases),
-                           style={'textAlign': 'center', "color": "white"}),
-                ], style={'width': '45%', 'float': 'left', 'display': 'inline-block', "backgroundColor": "#044038",
-                          "border": "5px black solid"}),
-                html.Div(id='death_covid', children=[
-                    html.P(children="Total deaths", style={'textAlign': 'center', "color": "white"}),
-                    html.P(id='death_cases_num', children="{:,}".format(total_death),
-                           style={'textAlign': 'center', "color": "white"})
-                ], style={'width': '45%', 'float': 'left', 'display': 'inline-block',
-                          "backgroundColor": "rgb(40,40,40)", "border": "5px black solid"}),
-                html.Div(id='regression_block', children=[
-                    html.P(children="Choose regression type", style={'textAlign': 'center', "color": "white"}),
-                    dcc.RadioItems(id='regression_type', options=['ARIMA', 'SARIMA', 'Lasso', 'Random Forest',
-                                                                  'Linear Regression', 'Xgboost'],
-                                   value='Linear Regression', style={'color': 'white'}, labelStyle={'display': 'block'})
-                ], style={'width': '95%', 'float': 'left', 'display': 'inline-block',
-                          "backgroundColor": "black", "border": "5px black solid"}),
-            ], style={'width': '15%', 'display': 'inline-block', 'height': 350}),
-            html.Div(id='forecast_block', children=[
+            ], style={'flex': '0'}),
+            dcc.Loading(
+                    id="loading",
+                    type="circle",  # "default", "circle", "dot"
+                    children=html.Div(id='forecast_block', children=[
                 dcc.Graph(id='graph_forecast', figure=fig_init)
-            ], style={'width': '52%', 'display': 'inline-block'})
+            ], style={'flex': '0'})
+                )
 
-        ])
-    ], style={"widh": "100vw",
-              "height": "100vh",
-              "border": "10px solid rgb(0, 0, 0)",
-              "outline": "10px solid rgb(0, 0, 0)",
-              "margin": "0px 0px 0px 0px",
-              "padding": "0px 0px 0px 0px",
-              "backgroundColor": "black",
-              "backgroundSize": "auto"}
-)
+        ], style={
+            'width': '52%',
+            'display': 'flex',
+            'flexDirection': 'column',
+            'gap': '2px'
+        }),
+
+    ], style={
+        'display': 'flex',
+        'flexDirection': 'row',
+        'alignItems': 'stretch',  # ← makes both columns equal height
+        'width': '100%'
+    }),
+
+], style={'backgroundColor': 'black', 'padding': '10px', 'minHeight': '100vh', 'boxSizing': 'border-box'})
+
+
 
 
 @app.callback(
@@ -312,18 +325,12 @@ def update(country, mesoregion, macroregion, region_type, smoothed_check, check_
         current_df['Confirmed_smoothed'] = current_df['Confirmed'].ewm(span=25).mean()
 
     df_ts = current_df[['Date', column]]
-    print("df_ts")
-    print(df_ts.head())
+
     df_ts.index = pd.to_datetime(df_ts['Date'], format='%Y-%m-%d')
     del df_ts['Date']
 
     df_ts_freq = df_ts.asfreq('D')
     df_ts_freq[column] = df_ts_freq[column].fillna(0)
-
-    print("df_ts_freq")
-    print(df_ts_freq.head())
-    print("days_before")
-    print(days_before)
 
     train, test = forecast.make_train_test(df_ts_freq, days_before)
     test = forecast.add_more_dates(test, days_after)
