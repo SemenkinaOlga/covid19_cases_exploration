@@ -333,7 +333,10 @@ def update(country, mesoregion, macroregion, region_type, smoothed_check, check_
     df_ts_freq[column] = df_ts_freq[column].fillna(0)
 
     train, test = forecast.make_train_test(df_ts_freq, days_before)
-    test = forecast.add_more_dates(test, days_after)
+    test = forecast.add_more_dates(test, days_after, train)
+
+    if len(train) == 0:
+        return fig
 
     color = '#2fdecd'
     if smoothed:
@@ -342,11 +345,15 @@ def update(country, mesoregion, macroregion, region_type, smoothed_check, check_
     fig.add_trace(go.Scatter(x=train.index, y=train[column],
                              line=dict(color=color, width=2),
                              mode='lines', name='Confirmed per day TRAIN'))
-    fig.add_trace(go.Scatter(x=test.index, y=test[column],
-                             line=dict(color=color, width=2, dash='dot'),
-                             mode='lines', name='Confirmed per day TEST'))
+    if len(test) > 0:
+        fig.add_trace(go.Scatter(x=test.index, y=test[column],
+                                 line=dict(color=color, width=2, dash='dot'),
+                                 mode='lines', name='Confirmed per day TEST'))
 
     print('graph_forecast start predictions')
+
+    if len(test) == 0:
+        return fig
 
     if regression_type == 'ARIMA':
         pred_df = forecast.make_forecast_ARIMA(column, train, test)

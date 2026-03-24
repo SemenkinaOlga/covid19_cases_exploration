@@ -103,7 +103,7 @@ def make_forecast_SARIMAX_seasonal(column, train, test):
 def make_forecast_Random_Forest_Regressor(column, train, test, max_depth, n_estimators, lags):
     regressor = RandomForestRegressor(max_depth=max_depth, n_estimators=n_estimators, random_state=0)
     forecaster = ForecasterRecursive(
-        regressor=regressor,
+        estimator=regressor,
         lags=lags
     )
 
@@ -115,7 +115,7 @@ def make_forecast_Random_Forest_Regressor(column, train, test, max_depth, n_esti
 def make_forecast_Lasso(column, train, test, lags):
     steps = len(test)
     forecaster = ForecasterDirect(
-        regressor=Lasso(random_state=123),
+        estimator=Lasso(random_state=123),
         transformer_y=StandardScaler(),
         steps=steps,
         lags=lags
@@ -143,7 +143,10 @@ def make_forecast_LinearRegression(column, train, test, lags):
 
 
 def make_train_test(df, days):
-    last_date = df.index.max()
+    if not days or days <= 0:
+        return df, pd.DataFrame(index=pd.DatetimeIndex([]), columns=df.columns)
+
+    last_date = df.index.dropna().max()
     dateMinusMonth = last_date - relativedelta(days=days)
     dateMinusMonth = dateMinusMonth.strftime('%Y-%m-%d')
 
@@ -153,11 +156,15 @@ def make_train_test(df, days):
     return train, test
 
 
-def add_more_dates(test, count):
+def add_more_dates(test, count, train):
     indexes = []
     values = []
-    cur_date = test.index.max()
-    cur_date_str = cur_date.strftime('%Y-%m-%d')
+    if test.empty:
+        cur_date = train.index.max()
+        cur_date_str = cur_date.strftime('%Y-%m-%d')
+    else:
+        cur_date = test.index.max()
+        cur_date_str = cur_date.strftime('%Y-%m-%d')
 
     for i in range(0, count):
         values.append(np.nan)
