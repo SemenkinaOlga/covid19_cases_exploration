@@ -7,7 +7,6 @@ from dash import dcc, html
 from dash.dependencies import Input, Output
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-import codecs
 
 import forecast
 import mapping
@@ -48,11 +47,8 @@ df_COVID_summary = df_COVID.groupby(['Country_Region', 'meso_region', 'macro_reg
 mapping.update_coordinates(df_COVID_summary)
 print("coordinates has been updated")
 
-total_cases = math.floor(df_COVID_summary[df_COVID_summary['Country_Region'] == 'Bulgaria']['Confirmed'])
-total_death = math.floor(df_COVID_summary[df_COVID_summary['Country_Region'] == 'Bulgaria']['Deaths'])
-
-print("COVID data")
-print(df_COVID.head())
+total_cases = math.floor(df_COVID_summary[df_COVID_summary['Country_Region'] == 'Bulgaria']['Confirmed'].iloc[0])
+total_death = math.floor(df_COVID_summary[df_COVID_summary['Country_Region'] == 'Bulgaria']['Deaths'].iloc[0])
 
 init_df_for_map = df_COVID[df_COVID['Country_Region'] == 'Bulgaria'].groupby(['Country_Region', 'meso_region',
                                                                               'macro_region', 'code']).agg(
@@ -63,7 +59,7 @@ init_map.save(rd.get_relative_path("init_map.html"))
 
 
 def delete_tile_for_map(file_name):
-    f = codecs.open(file_name, 'r')
+    f = open(file_name, 'r')
     html_str = f.read()
     txt_to_rep = "\\u0026copy; \\u003ca href=\\\"http://www.openstreetmap.org/copyright\\\"\\u003eOpenStreetMap\\u003c/a\\u003e contributors \\u0026copy; \\u003ca href=\\\"http://cartodb.com/attributions\\\"\\u003eCartoDB\\u003c/a\\u003e, CartoDB \\u003ca href =\\\"http://cartodb.com/attributions\\\"\\u003eattributions\\u003c/a\\u003e"
     html_str = html_str.replace(txt_to_rep, "")
@@ -307,7 +303,7 @@ def update(country, mesoregion, macroregion, region_type, smoothed_check, check_
     elif days - days_before < 301:
         return {'textAlign': 'center', 'align-items': 'center', 'color': '#6e1b15'}, \
                "Amount of days for train must be more then 300, got " + str(days - days_before), fig
-    current_df = current_df[(current_df["Date"] >= start_date) & (current_df["Date"] <= end_date)]
+    current_df = current_df[(current_df["Date"] >= start_date) & (current_df["Date"] <= end_date)].copy()
 
     column = 'Confirmed'
     if smoothed:
@@ -488,7 +484,7 @@ def update(country, mesoregion, macroregion, region_type, start_date, end_date, 
         current_df = df_world
         title = 'COVID-19 cases in the World'
     start_date, end_date = define_start_end_dates(start_date, end_date, date_type)
-    current_df = current_df[(current_df["Date"] >= start_date) & (current_df["Date"] <= end_date)]
+    current_df = current_df[(current_df["Date"] >= start_date) & (current_df["Date"] <= end_date)].copy()
     current_df['Confirmed_smoothed'] = current_df['Confirmed'].ewm(span=25).mean()
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=current_df['Date'], y=current_df['Confirmed'],
@@ -511,4 +507,4 @@ def update(country, mesoregion, macroregion, region_type, start_date, end_date, 
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=False)

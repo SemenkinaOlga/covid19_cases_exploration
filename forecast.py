@@ -10,8 +10,8 @@ from sklearn.linear_model import Lasso
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import StandardScaler
 
-from skforecast.ForecasterAutoreg import ForecasterAutoreg
-from skforecast.ForecasterAutoregDirect import ForecasterAutoregDirect
+from skforecast.recursive import ForecasterRecursive
+from skforecast.direct import ForecasterDirect
 import xgboost as xgb
 
 
@@ -102,7 +102,7 @@ def make_forecast_SARIMAX_seasonal(column, train, test):
 
 def make_forecast_Random_Forest_Regressor(column, train, test, max_depth, n_estimators, lags):
     regressor = RandomForestRegressor(max_depth=max_depth, n_estimators=n_estimators, random_state=0)
-    forecaster = ForecasterAutoreg(
+    forecaster = ForecasterRecursive(
         regressor=regressor,
         lags=lags
     )
@@ -114,7 +114,7 @@ def make_forecast_Random_Forest_Regressor(column, train, test, max_depth, n_esti
 
 def make_forecast_Lasso(column, train, test, lags):
     steps = len(test)
-    forecaster = ForecasterAutoregDirect(
+    forecaster = ForecasterDirect(
         regressor=Lasso(random_state=123),
         transformer_y=StandardScaler(),
         steps=steps,
@@ -127,12 +127,12 @@ def make_forecast_Lasso(column, train, test, lags):
 
 def make_forecast_LinearRegression(column, train, test, lags):
     steps = len(test)
-    forecaster = ForecasterAutoreg(
-        regressor=LinearRegression(),
+    forecaster = ForecasterRecursive(
+        estimator=LinearRegression(),
         lags=15
     )
 
-    forecaster.fit(y=train[column])
+    forecaster.fit(y=train[column], store_in_sample_residuals=True)
 
     predictions = forecaster.predict_interval(
         steps=steps,
