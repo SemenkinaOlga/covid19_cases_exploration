@@ -14,12 +14,12 @@ location_zero = [27, 0]
 
 def update_coordinates(df_COVID_summary):
     country_codes = df_COVID_summary['code']
-    putFile = "country coordinates\\"
-    inFile = "coords\\"
+    putFile = "country coordinates"
+    inFile = "coords"
 
     # Add properties from column to geo
     for i in range(len(df_COVID_summary)):
-        in_file_name = rd.get_relative_path(inFile + str(country_codes[i]) + ".geo.json")
+        in_file_name = rd.get_relative_path(str(country_codes[i]) + ".geo.json", current_folder=inFile)
         #print(in_file_name)
         if os.path.exists(in_file_name):
             text = open(in_file_name, 'r', encoding='utf-8-sig').read()
@@ -36,7 +36,7 @@ def update_coordinates(df_COVID_summary):
             str1 += "\"" + "Total deaths" + "\":\"" + str(df_COVID_summary["Deaths"][i]) + "\""
 
             file = str1 + str2
-            out_file_name = rd.get_relative_path(putFile + df_COVID_summary['code'][i] + ".geo.json")
+            out_file_name = rd.get_relative_path(df_COVID_summary['code'][i] + ".geo.json", current_folder=putFile)
             #print(out_file_name)
             file1 = open(out_file_name, 'w', encoding='utf-8')
             file1.write(file)

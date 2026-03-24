@@ -30,7 +30,7 @@ def read_COVID_data():
     url_part = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_'
 
     for key, value in df_dict.items():
-        value = pd.read_csv(url_part + key + '.csv', parse_dates=[0])
+        value = pd.read_csv(url_part + key + '.csv', parse_dates=[0], date_format='%m/%d/%y')
 
         value.rename(columns={'Province/State': 'Province_State', 'Country/Region': 'Country_Region'}, inplace=True)
 
@@ -39,7 +39,7 @@ def read_COVID_data():
 
         value = value.melt(id_vars=dim_col, value_vars=date_col, var_name='Date', value_name=key)
 
-        value['Date'] = pd.to_datetime(value['Date'])
+        value['Date'] = pd.to_datetime(value['Date'], format='%m/%d/%y')
 
         df_dict[key] = value
 
