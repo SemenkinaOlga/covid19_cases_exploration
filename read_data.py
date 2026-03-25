@@ -2,6 +2,9 @@ import os
 import pandas as pd
 import numpy as np
 
+data_folder = 'data'
+df_names = ['confirmed_global', 'deaths_global', 'recovered_global']
+
 
 def get_relative_path(name, current_folder=""):
     file_name = os.path.abspath(os.getcwd())
@@ -11,8 +14,8 @@ def get_relative_path(name, current_folder=""):
     return file_name
 
 
-def read_df(name, separator):
-    file_name = get_relative_path(name)
+def read_df(name, separator, folder):
+    file_name = get_relative_path(name, folder)
 
     if os.path.exists(file_name):
         df = pd.read_csv(file_name, sep=separator)
@@ -24,13 +27,13 @@ def read_df(name, separator):
 
 
 def read_COVID_data():
-    df_names = ['confirmed_global', 'deaths_global', 'recovered_global']
     df_list = [pd.DataFrame() for df in df_names]
     df_dict = dict(zip(df_names, df_list))
-    url_part = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_'
 
     for key, value in df_dict.items():
-        value = pd.read_csv(url_part + key + '.csv', parse_dates=[0], date_format='%m/%d/%y')
+        name = key + '.csv'
+        path = get_relative_path(name, data_folder)
+        value = pd.read_csv(path, parse_dates=[0], date_format='%m/%d/%y')
 
         value.rename(columns={'Province/State': 'Province_State', 'Country/Region': 'Country_Region'}, inplace=True)
 
