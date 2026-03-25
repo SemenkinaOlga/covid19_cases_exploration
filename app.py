@@ -529,4 +529,4 @@ def update(country, mesoregion, macroregion, region_type, start_date, end_date, 
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host="0.0.0.0", debug=False)
