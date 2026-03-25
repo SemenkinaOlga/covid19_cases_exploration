@@ -15,7 +15,7 @@ import read_data as rd
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-df_country_region = rd.read_df('df_country_region.csv', ',')
+df_country_region = rd.read_df('df_country_region.csv', ',', 'data')
 print("Country region data has been read")
 
 df_COVID = rd.read_COVID_data()
