@@ -8,5 +8,5 @@ branca
 python-dateutil
 statsmodels
 scikit-learn
-skforecast
+skforecast==0.21.0
 xgboost
