@@ -118,7 +118,6 @@ input:valid {
     color: #fff;
 }
 
-
 .DayPickerNavigation_svg__horizontal {
     fill: white;
     display: block
@@ -148,7 +147,6 @@ input:valid {
     color: white;
 }
 
-/* Color of default text */
 .Select-value-label {
     color: white !important;
 }
@@ -167,13 +165,11 @@ input:valid {
     border: 1px solid #420D09;
 }
 
-/* ── Page background & default text ── */
 body {
   background-color: #111;
   color: #ddd;
 }
 
-/* ── Dropdown (modern Dash uses these classes) ── */
 .Select-control,
 .dash-dropdown .Select-control {
   background-color: #1a1a1a !important;
@@ -206,7 +202,6 @@ body {
   color: #fff !important;
 }
 
-/* ── Number input fields ── */
 input[type="number"],
 input[type="text"],
 .dash-input {
@@ -215,25 +210,21 @@ input[type="text"],
   border: 1px solid #444 !important;
 }
 
-/* ── Radio buttons label text ── */
 .form-check-label,
 label {
   color: #ddd !important;
 }
 
-/* ── Checklist ── */
 .dash-checklist label {
   color: #ddd !important;
 }
 
-/* ── General containers ── */
 .dash-dropdown,
 .rc-slider,
 .dcc-input {
   background-color: #1a1a1a !important;
 }
 
-/* ── Panels / cards ── */
 .card, .panel {
   background-color: #1a1a1a !important;
   border: 1px solid #333 !important;
@@ -253,7 +244,6 @@ button:hover,
   color: #fff !important;
 }
 
-/* ── New react-select classes (Dash 2.x+) ── */
 [class*="-menu"] {
   background-color: #1a1a1a !important;
   color: #ddd !important;
@@ -283,13 +273,11 @@ button:hover,
   color: #ddd !important;
 }
 
-/* ── Dropdown menu container ── */
 .dash-dropdown-content {
   background-color: #111 !important;
   border: 1px solid #444 !important;
 }
 
-/* ── Search area ── */
 .dash-dropdown-search-container {
   background-color: #111 !important;
   border-bottom: 1px solid #444 !important;
@@ -310,14 +298,12 @@ button:hover,
   color: #777 !important;
 }
 
-/* ── Options list ── */
 .dash-options-list,
 .dash-dropdown-options {
   background-color: #111 !important;
   scrollbar-color: #444 #111;
 }
 
-/* ── Individual option ── */
 .dash-dropdown-option,
 .dash-options-list-option {
   background-color: #111 !important;
@@ -330,18 +316,15 @@ button:hover,
   color: #fff !important;
 }
 
-/* ── Selected option ── */
 .dash-options-list-option.selected {
   background-color: #19b599 !important;
   color: #fff !important;
 }
 
-/* ── Option text ── */
 .dash-options-list-option-text {
   color: #ddd !important;
 }
 
-/* ── Scrollbar ── */
 .dash-options-list::-webkit-scrollbar {
   width: 6px;
 }
@@ -355,14 +338,12 @@ button:hover,
   border-radius: 3px;
 }
 
-/* ── Remove text background box ── */
 .dash-options-list-option-text,
 .dash-options-list-option-text span {
   background-color: transparent !important;
   padding: 0 !important;
 }
 
-/* ── Fix selected option highlight ── */
 .dash-options-list-option.selected,
 .dash-options-list-option[aria-selected="true"] {
   background-color: #19b599 !important;
@@ -375,12 +356,10 @@ button:hover,
   color: #fff !important;
 }
 
-/* ── Fix option wrapper background ── */
 .dash-options-list-option-wrapper {
   background-color: transparent !important;
 }
 
-/* ── Ensure full row background, no double layers ── */
 .dash-options-list-option {
   background-color: #000000 !important;
   color: #ddd !important;
@@ -389,7 +368,6 @@ button:hover,
   align-items: center !important;
 }
 
-/* ── Remove teal/blue highlight from selected option ── */
 .dash-options-list-option.selected {
   background-color: #111 !important;
   color: #ddd !important;
@@ -401,7 +379,142 @@ button:hover,
   background-color: transparent !important;
 }
 
-/* ── Keep hover distinct ── */
 .dash-options-list-option.selected:hover {
   background-color: #333 !important;
+}
+
+.dash-datepicker-input-wrapper,
+.dash-datepicker {
+  background-color: #111 !important;
+  color: #ddd !important;
+}
+
+.dash-datepicker-input {
+  background-color: #111 !important;
+  color: #ddd !important;
+  border: 1px solid #444 !important;
+}
+
+.dash-datepicker-input::placeholder {
+  color: #777 !important;
+}
+
+.dash-datepicker-range-arrow,
+.dash-datepicker-caret-icon {
+  color: #ddd !important;
+  fill: #ddd !important;
+}
+
+.dash-datepicker-content {
+  background-color: #111 !important;
+  border: 1px solid #444 !important;
+  color: #ddd !important;
+}
+
+.dash-datepicker-calendar-wrapper {
+  background-color: #111 !important;
+}
+
+.dash-datepicker-controls {
+  background-color: #111 !important;
+  color: #ddd !important;
+}
+
+.dash-datepicker-month-nav {
+  background-color: #111 !important;
+  border: 1px solid #444 !important;
+  color: #ddd !important;
+}
+
+.dash-datepicker-month-nav svg {
+  fill: #ddd !important;
+}
+
+.dash-datepicker-month-nav:disabled svg {
+  fill: #555 !important;
+}
+
+.dash-dropdown-wrapper .dash-dropdown {
+  background-color: #111 !important;
+  border: 1px solid #444 !important;
+  color: #ddd !important;
+}
+
+.dash-dropdown-value,
+.dash-dropdown-value-item,
+.dash-dropdown-value-item span {
+  color: #ddd !important;
+}
+
+.dash-dropdown-trigger-icon {
+  fill: #ddd !important;
+}
+
+.dash-input-container.dash-input {
+  background-color: #111 !important;
+  border: 1px solid #444 !important;
+  color: #ddd !important;
+}
+
+.dash-input-element {
+  background-color: #111 !important;
+  color: #ddd !important;
+  border: none !important;
+}
+
+.dash-input-stepper {
+  background-color: #222 !important;
+  color: #ddd !important;
+  border: 1px solid #444 !important;
+}
+
+.dash-input-stepper:disabled {
+  color: #555 !important;
+}
+
+.dash-datepicker-calendar {
+  background-color: #111 !important;
+  color: #ddd !important;
+}
+
+.dash-datepicker-calendar-month-header {
+  color: #ddd !important;
+  background-color: #111 !important;
+}
+
+.dash-datepicker-calendar thead th span {
+  color: #aaa !important;
+}
+
+.dash-datepicker-calendar-date-inside {
+  background-color: #1a1a1a !important;
+  color: #ddd !important;
+  border: 1px solid #333 !important;
+  cursor: pointer;
+}
+
+.dash-datepicker-calendar-date-inside:hover {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+.dash-datepicker-calendar-date-highlighted {
+  background-color: #1d4d47 !important;
+  color: #fff !important;
+}
+
+.dash-datepicker-calendar-date-selected {
+  background-color: #19b599 !important;
+  color: #fff !important;
+  border-color: #19b599 !important;
+}
+
+.dash-datepicker-calendar-date-disabled {
+  background-color: #111 !important;
+  color: #444 !important;
+  cursor: not-allowed !important;
+}
+
+.dash-datepicker-calendar-padding {
+  background-color: #111 !important;
 }
