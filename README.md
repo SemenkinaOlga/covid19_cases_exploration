@@ -1,5 +1,5 @@
 COVID-19 cases exploration Dashboard
-See app here https://covid19-cases-exploration.herokuapp.com
+See app here https://covid19-cases.apps.apply.build/
 
 COVID-19 dashboard offers a global and local analysis of the pandemic, letting you track the latest data and trends, compare cases across regions, and predict the future trajectory of the pandemic. Data is sourced from a reliable daily-updated GitHub repository for accuracy and timeliness.
 
